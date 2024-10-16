@@ -13,7 +13,7 @@ jobs:
         
   set_env:
     runs-on: ubuntu-latest
-
+    needs: checkout_code
     outputs:
       TAG: ${{ steps.set_env.outputs.TAG }}
 
