@@ -2,6 +2,9 @@ name: Print Environment Variables
 
 on: 
   push:
+    branches:
+      - main
+      
   workflow_dispatch:
 
 jobs:
@@ -13,8 +16,7 @@ jobs:
     steps:
       - name: Set environment variables
         id: set_env
-        uses: ./set_env.yaml
-        
+        uses: amartins-alexandre/actionflows/.github/workflows/set_env.yml@main
   
   print_env:
     runs-on: ubuntu-latest
