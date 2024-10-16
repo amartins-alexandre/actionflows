@@ -2,6 +2,13 @@ name: Set Environment Variables
 
 on: 
   workflow_call:
+    outputs:
+      TAG:
+        description: 'The tag to be set'
+        value: ${{ jobs.set_env.outputs.TAG }}
+      BRANCH:
+        description: 'The branch to be set'
+        value: ${{ jobs.set_env.outputs.BRANCH }}
 
 jobs:
   set_env:
@@ -15,6 +22,5 @@ jobs:
       - name: Set Environment Variables
         id: set_env
         run: |
-          echo "Setting environment variables..."
-          echo "TAG=1.0.0" >> $GITHUB_ENV
-          echo "BRANCH=main" >> $GITHUB_ENV
+          echo "TAG=1.0.0" >> $GITHUB_OUTPUT
+          echo "BRANCH=main" >> $GITHUB_OUTPUT
