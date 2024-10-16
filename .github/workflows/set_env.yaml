@@ -11,6 +11,9 @@ jobs:
       TAG: ${{ steps.tag_create.outputs.TAG }}
     
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        
       - name: Tag Create
         id: tag_create
         run: |
