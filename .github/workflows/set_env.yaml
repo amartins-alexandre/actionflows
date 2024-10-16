@@ -2,15 +2,19 @@ name: Set Environment Variables
 
 on: 
   workflow_call:
-    outputs:
-      TAG: ${{ github.ref }}:${{ github.run_number }}
 
 jobs:
   set_env:
     runs-on: ubuntu-latest
 
+    outputs:
+      TAG: ${{ steps.set_env.outputs.TAG }}
+      BRANCH: ${{ steps.set_env.outputs.BRANCH }}
+
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - name: Set Environment Variables
+        id: set_env
+        run: |
+          echo "Setting environment variables..."
+          echo "TAG=1.0.0" >> $GITHUB_ENV
+          echo "BRANCH=main" >> $GITHUB_ENV

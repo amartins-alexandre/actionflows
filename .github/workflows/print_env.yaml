@@ -22,3 +22,4 @@ jobs:
       - name: Print Environment Variables
         run: |
           echo "TAG: ${{ needs.set_env.outputs.TAG }}"
+          echo "BRANCH: ${{ needs.set_env.outputs.BRANCH }}"
