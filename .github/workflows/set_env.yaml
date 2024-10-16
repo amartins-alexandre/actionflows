@@ -8,11 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     
     outputs:
-      TAG: ${{ steps.set_tag.outputs.TAG }}
+      TAG: ${{ steps.tag_create.outputs.TAG }}
     
     steps:
       - name: Tag Create
         id: tag_create
         run: |
           echo "TAG::${{ github.ref }}:${{ github.run_number }}" >> GITHUB_ENV
-      
