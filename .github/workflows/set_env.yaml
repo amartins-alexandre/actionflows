@@ -2,19 +2,15 @@ name: Set Environment Variables
 
 on: 
   workflow_call:
+    outputs:
+      TAG: ${{ github.ref }}:${{ github.run_number }}
 
 jobs:
   set_env:
     runs-on: ubuntu-latest
-    
-    outputs:
-      TAG: ${{ steps.tag_create.outputs.TAG }}
-    
+
     steps:
-      - name: Checkout Repository
+      - name: Checkout Code
         uses: actions/checkout@v4
-        
-      - name: Tag Create
-        id: tag_create
-        run: |
-          echo "TAG::${{ github.ref }}:${{ github.run_number }}" >> GITHUB_ENV
+        with:
+          fetch-depth: 0
