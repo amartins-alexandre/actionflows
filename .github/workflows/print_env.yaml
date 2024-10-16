@@ -10,7 +10,7 @@ on:
 jobs:
   set_env:
     name: Set Environment Variables
-    uses: amartins-alexandre/actionflows/.github/workflows/set_env.yml@main
+    uses: amartins-alexandre/actionflows/.github/workflows/set_env.yaml@main
   
   print_env:
     runs-on: ubuntu-latest
