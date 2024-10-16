@@ -9,14 +9,8 @@ on:
 
 jobs:
   set_env:
-    runs-on: ubuntu-latest
-    outputs:
-      TAG: ${{ steps.set_env.outputs.TAG }}
-
-    steps:
-      - name: Set environment variables
-        id: set_env
-        uses: amartins-alexandre/actionflows/.github/workflows/set_env.yml@main
+    name: Set Environment Variables
+    uses: amartins-alexandre/actionflows/.github/workflows/set_env.yml@main
   
   print_env:
     runs-on: ubuntu-latest
