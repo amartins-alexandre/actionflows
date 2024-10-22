@@ -30,4 +30,4 @@ jobs:
     steps:
       - name: Print Environment 2
         run: |
-          echo "TAG: ${{ jobs.set_env.outputs.TAG }}"
+          echo "TAG: ${{ needs.set_env.outputs.TAG }}"
