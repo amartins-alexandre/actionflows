@@ -10,23 +10,20 @@ permissions:
 jobs:
   gh-pr-create:
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.head.ref }} == "release"
+    if: ${{ github.event.push.ref }} == "release"
     
     steps:
       - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Create PR
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr create -B release \
+          gh pr create -B develop \
             -H ${{ github.event.pull_request.head.ref }} \
             -t "Merge release into develop" \
             -b "This PR was created by the automation workflow." \
             -a "${{ github.event.pull_request.user.login }}" \
-            -l "enhancement"
-            -l "help wanted"
+            -l "enhancement,help wanted"
             -r ${{ github.event.repository.owner.login }} 
       
