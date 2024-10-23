@@ -7,6 +7,7 @@ on:
 
 permissions:
   pull-requests: write
+  issues: write
 
 jobs:
   gh-pr-create:
@@ -20,7 +21,16 @@ jobs:
           echo "BaseRef: ${{ github.event.pull_request.base.ref }}"
           echo "HeadRef: ${{ github.event.pull_request.head.ref }}"
           echo "Ref: ${{ github.ref }}"
-        
+      
+      - name: Request Approval
+        uses: trstringer/manual-approval@v1
+        with:
+          secret: ${{ secrets.GITHUB_TOKEN }}
+          approvers: "${{ github.event.repository.owner.login }}"
+          minimum-approvals: 1
+          issue-title: "Approve PR"
+          issue-body: "Approve this PR to create a new PR to merge the release branch into develop."
+
       - name: Create PR
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -31,5 +41,4 @@ jobs:
             -b "This PR was created by the automation workflow." \
             -a "${{ github.actor }}" \
             -l "enhancement,help wanted" \
-            -r "${{ github.event.repository.owner.login }}"
-      
+            -r "${{ github.event.repository.owner.login }}"     
