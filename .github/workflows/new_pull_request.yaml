@@ -20,10 +20,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh pr create -B develop \
-            -H ${{ github.event.pull_request.head.ref }} \
+            -H ${{ github.event.push.ref }} \
             -t "Merge release into develop" \
             -b "This PR was created by the automation workflow." \
-            -a "${{ github.event.pull_request.user.login }}" \
+            -a "${{ github.event.push.pusher.name }}" \
             -l "enhancement,help wanted"
             -r ${{ github.event.repository.owner.login }} 
       
