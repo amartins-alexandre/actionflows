@@ -1,0 +1,35 @@
+name: Create PR 
+
+on: 
+  pull_request:
+    branches: [ main ]
+    types: [ opened, synchronize ]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  gh-pr-create:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.head.ref }} == "release"
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: |
+          echo "BaseRef: ${{ github.event.pull_request.base.ref }}"
+          echo "HeadRef: ${{ github.event.pull_request.head.ref }}"
+          echo "Ref: ${{ github.ref }}"
+        
+      - name: Create PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create -B develop \
+            -H ${{ github.event.pull_request.head.ref }} \
+            -t "Merge release into develop" \
+            -b "This PR was created by the automation workflow." \
+            -a "${{ github.actor }}" \
+            -l "enhancement,help wanted" \
+            -r "${{ github.event.repository.owner.login }}"
+      
