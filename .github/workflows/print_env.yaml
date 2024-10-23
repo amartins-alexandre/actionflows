@@ -1,11 +1,9 @@
 name: Print Environment Variables
 
 on: 
-  push:
+  pull_request:
     branches:
       - main
-
-  workflow_dispatch:
 
 jobs:
   set_env:
@@ -24,10 +22,21 @@ jobs:
           echo "TAG: ${{ needs.set_env.outputs.TAG }}"
           echo "BRANCH: ${{ needs.set_env.outputs.BRANCH }}"
   
-  print_owner_login:
+  gh-pr-create:
     runs-on: ubuntu-latest
     needs: print_env
+    if: ${{ github.event.pull_request.head.ref }} == "release"
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Print Repository Owner
-        run: echo "${{ github.event.repository.owner.login }}"
+      - name: Create PR
+        run: |
+          gh pr create -B release \
+            -H ${{ github.event.pull_request.head.ref }} \
+            -t "Merge release into develop" \
+            -b "This PR was created by the automation workflow." \
+            -a "${{ github.event.pull_request.user.login }}" \
+            -l "enhancement"
+            -l "help wanted"
+            -r ${{ github.event.repository.owner.login }} 
       
