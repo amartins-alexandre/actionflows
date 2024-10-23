@@ -13,25 +13,15 @@ jobs:
     name: Set Environment Variables
     uses: amartins-alexandre/actionflows/.github/workflows/set_env.yaml@main
   
-  print_env:
-    runs-on: ubuntu-latest
-    needs: set_env
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Print Environment Variables
-        run: |
-          echo "TAG: ${{ needs.set_env.outputs.TAG }}"
-          echo "BRANCH: ${{ needs.set_env.outputs.BRANCH }}"
-  
   gh-pr-create:
     runs-on: ubuntu-latest
-    needs: print_env
     if: ${{ github.event.pull_request.head.ref }} == "release"
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        
       - name: Create PR
         run: |
           gh pr create -B release \
