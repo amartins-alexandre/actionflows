@@ -19,7 +19,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr create -B release \
+          gh pr create -B develop \
             -H ${{ github.event.pull_request.head.ref }} \
             -t "Merge release into develop" \
             -b "This PR was created by the automation workflow." \
