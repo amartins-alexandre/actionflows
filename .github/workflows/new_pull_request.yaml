@@ -1,7 +1,7 @@
 name: Create PR 
 
 on: 
-  pull_request:
+  push:
     branches: [ main ]
 
 permissions:
@@ -10,7 +10,7 @@ permissions:
 jobs:
   gh-pr-create:
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.head.ref }} == "release"
+    if: ${{ github.event.push.ref }} == "release"
     
     steps:
       - uses: actions/checkout@v4
