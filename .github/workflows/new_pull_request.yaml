@@ -31,5 +31,5 @@ jobs:
             -b "This PR was created by the automation workflow." \
             -a "${{ github.actor }}" \
             -l "enhancement,help wanted"
-            -r ${{ github.event.repository.owner.login }} 
+            --reviewer "${{ github.event.repository.owner.login }}"
       
