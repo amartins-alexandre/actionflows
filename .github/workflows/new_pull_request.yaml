@@ -30,6 +30,6 @@ jobs:
             -t "Merge release into develop" \
             -b "This PR was created by the automation workflow." \
             -a "${{ github.actor }}" \
-            -l "enhancement,help wanted"
-            --reviewer "${{ github.event.repository.owner.login }}"
+            -l "enhancement,help wanted" \
+            -r "${{ github.event.repository.owner.login }}"
       
