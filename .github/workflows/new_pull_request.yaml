@@ -15,7 +15,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: echo "${{ github.event.push }}"
+      - run: |
+          echo "BaseRef: ${{ github.base_ref }}"
+          echo "HeadRef: ${{ github.head_ref }}"
+          echo "Ref: ${{ github.ref }}"
         
       - name: Create PR
         env:
