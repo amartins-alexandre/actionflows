@@ -1,28 +1,23 @@
-name: Print Environment Variables
+name: Create PR 
 
 on: 
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 permissions:
   pull-requests: write
 
 jobs:
-  set_env:
-    name: Set Environment Variables
-    uses: amartins-alexandre/actionflows/.github/workflows/set_env.yaml@main
-  
   gh-pr-create:
     runs-on: ubuntu-latest
     if: ${{ github.event.pull_request.head.ref }} == "release"
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         
       - name: Create PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh pr create -B release \
             -H ${{ github.event.pull_request.head.ref }} \
