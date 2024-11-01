@@ -16,6 +16,9 @@ jobs:
       - name: Update Version
         run: |
           jq -r '.version' package.json
+
+          git config --global user.name "github-actions[bot]"
+          git config --globaç user.email "github-actions[bot]@users.noreply.github.com"
           npm version $(cat version.txt)
           jq -r '.version' package.json
   
