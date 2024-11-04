@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: qa
+    timeout-minutes: 5
 
     steps:
       - run: echo "Request Approval"
