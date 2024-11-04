@@ -1,0 +1,14 @@
+name: Approval Request
+on:
+  push:
+    branches: [release]
+
+jobs:
+  approval_request:
+    name: Approval Request Env
+    runs-on: ubuntu-latest
+    environment:
+      name: qa
+
+    steps:
+      - run: echo "Request Approval"
