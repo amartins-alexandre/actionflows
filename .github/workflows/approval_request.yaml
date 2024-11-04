@@ -4,16 +4,10 @@ on:
     branches: [release]
 
 jobs:
-  timeout:
-    runs-on: ubuntu-latest
-    timeout-minutes: 2
-    steps:
-      - name: Wait for Approval
-        run: echo "Waiting for approval... This job will timeout after 2 minutes."
   approval_request:
-    needs: timeout
     name: Approval Request Env
     runs-on: ubuntu-latest
+    timeout-minutes: 1
     environment:
       name: qa
 
