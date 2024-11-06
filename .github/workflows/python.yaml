@@ -25,6 +25,11 @@ jobs:
     environment: qa
     steps:
       - run: echo "${{ github.actor }}"
+
+  after-approval-request:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "${{ github.repository }}"
         
       
 
