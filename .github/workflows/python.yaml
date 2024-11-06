@@ -28,6 +28,7 @@ jobs:
 
   after-approval-request:
     runs-on: ubuntu-latest
+    needs: approval-request
     steps:
       - run: echo "${{ github.repository }}"
         
