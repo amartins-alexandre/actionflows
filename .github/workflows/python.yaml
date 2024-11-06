@@ -31,8 +31,6 @@ jobs:
     needs: approval-request
     steps:
       - run: echo "${{ github.repository }}"
-        
-      
 
     
   
