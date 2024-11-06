@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: qa
     steps:
-      - run: echo "${{ github..actor }}"
+      - run: echo "${{ github.actor }}"
         
       
 
