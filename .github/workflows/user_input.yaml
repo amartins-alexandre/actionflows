@@ -1,0 +1,20 @@
+name: Create PR 
+
+on: 
+  push:
+    branches: [ main ]
+
+jobs:
+  user-input:
+    runs-on: ubuntu-latest
+    steps:
+      - name: User Input Version
+        run: |
+          read -p "Do you want to install the latest version of XYZ? [y/n]: " response
+          if [[ "$response" == "y" ]]; then
+            xyz_version="2.15.0"
+          else
+            read -p "Enter the version of XYZ you want to install: " xyz_version
+          fi
+          echo "xyz_version=$xyz_version" >> $GITHUB_ENV
+      
