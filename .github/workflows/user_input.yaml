@@ -1,8 +1,12 @@
 name: User Input
 
 on: 
-  push:
-    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      PACKAGE_VERSION:
+        description: 'Package Version'
+        required: true
+        type: string
 
 jobs:
   user-input:
@@ -10,11 +14,5 @@ jobs:
     steps:
       - name: User Input Version
         run: |
-          read -p "Do you want to install the latest version of XYZ? [y/n]: " response
-          if [[ "$response" == "y" ]]; then
-            xyz_version="2.15.0"
-          else
-            read -p "Enter the version of XYZ you want to install: " xyz_version
-          fi
-          echo "xyz_version=$xyz_version" >> $GITHUB_ENV
+          echo "Version=${{ inputs.PACKAGE_VERSION }}"
       
