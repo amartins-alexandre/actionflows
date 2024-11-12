@@ -7,15 +7,15 @@ on:
         description: 'Package Version'
         required: true
         type: string
-      target_branch:
-        description: "Selecione a branch"
-        required: true
-        default: "main"
-        type: choice
-        options:
-          - main
-          - develop
-          - release
+      # target_branch:
+      #   description: "Selecione a branch"
+      #   required: true
+      #   default: "main"
+      #   type: choice
+      #   options:
+      #     - main
+      #     - develop
+      #     - release
 
 jobs:
   user-input:
