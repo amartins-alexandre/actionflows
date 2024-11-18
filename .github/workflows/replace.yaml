@@ -1,22 +1,18 @@
-name: User Input Replace
+name: Replace ARG Example
 
-on: 
-  workflow_dispatch:
-    inputs:
-      HOST:
-        description: 'HOST USED'
-        required: true
-        type: string
+on: [workflow_dispatch]
 
 jobs:
-  user-input:
+  replace-example:
     runs-on: ubuntu-latest
     steps:
-      - name: User Input Version
-        run: |
-          echo "INPUT=${{ inputs.HOST }}"
+      - name: Configurar variável com prefixo
+        run: echo "HOST=https://qualquercoisa.com" >> $GITHUB_ENV
 
-      - name: Replaced
+      - name: Remover o prefixo "https://"
         run: |
-          host=${{ inputs.HOST#https:// }}
-          echo "HOST=$host"
+          CLEANED_HOST=${HOST#https://}
+          echo "CLEANED_HOST=${CLEANED_HOST}" >> $GITHUB_ENV
+
+      - name: Exibir resultado
+        run: echo "Host limpo: $CLEANED_HOST"
