@@ -15,4 +15,5 @@ jobs:
           echo "CLEANED_HOST=${CLEANED_HOST}" >> $GITHUB_ENV
 
       - name: Exibir resultado
-        run: echo "Host limpo: $CLEANED_HOST"
+        run: |
+          echo "Host limpo: $CLEANED_HOST"
