@@ -18,5 +18,5 @@ jobs:
 
       - name: Replaced
         run: |
-          host=${{ inputs.HOST }} | sed 's/https:\/\///'
+          host="${{ inputs.HOST }}" | sed 's|https://||'
           echo "HOST=$host"
