@@ -1,0 +1,22 @@
+name: User Input Replace
+
+on: 
+  workflow_dispatch:
+    inputs:
+      HOST:
+        description: 'HOST USED'
+        required: true
+        type: string
+
+jobs:
+  user-input:
+    runs-on: ubuntu-latest
+    steps:
+      - name: User Input Version
+        run: |
+          echo "INPUT=${{ inputs.HOST }}"
+
+      - name: Replaced
+        run: |
+          host=${{ inputs.HOST }}.replace("https://", "")
+          echo "HOST=$host"
